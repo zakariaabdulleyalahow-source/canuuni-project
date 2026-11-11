@@ -1,0 +1,11 @@
+# Block all direct HTTP access to this folder.
+# Files here are only ever loaded via PHP include/require, never requested directly.
+<IfModule mod_authz_core.c>
+    # Apache 2.4+
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    # Apache 2.2 fallback
+    Order allow,deny
+    Deny from all
+</IfModule>

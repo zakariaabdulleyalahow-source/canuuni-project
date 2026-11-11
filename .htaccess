@@ -1,0 +1,132 @@
+# Baseline security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Block access to error_log files
+<FilesMatch "^error_log$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Friendly Error Pages
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+ErrorDocument 500 /500.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # --------------------------------------------
+    # 0. Direct Asset / Static File Exclusion
+    # --------------------------------------------
+    RewriteCond %{REQUEST_URI} ^/assets/ [OR]
+    RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg)$ [NC]
+    RewriteRule ^ - [L]
+
+    # --------------------------------------------
+    # 1. Map Customer Routes
+    # --------------------------------------------
+    RewriteRule ^login$ customer/login.php [L,QSA]
+    RewriteRule ^register$ customer/register.php [L,QSA]
+    RewriteRule ^dashboard$ customer/dashboard.php [L,QSA]
+    RewriteRule ^logout$ customer/logout.php [L,QSA]
+
+    RewriteCond %{THE_REQUEST} \s/customer/(login|register|dashboard|logout)[\s?] [NC]
+    RewriteRule ^customer/(.*)$ /%1 [R=301,L]
+
+    # --------------------------------------------
+    # 2. SEO-Friendly Product URLs
+    # --------------------------------------------
+    RewriteRule ^product/([0-9]+)(?:/[^/]+)?/?$ product-details.php?id=$1 [L,QSA]
+
+    # --------------------------------------------
+    # 3. Canonical Redirect: Remove direct .php extensions
+    # --------------------------------------------
+    RewriteCond %{REQUEST_URI} !^/ajax/
+    RewriteCond %{REQUEST_URI} !^/config/
+    RewriteCond %{REQUEST_URI} !^/modules/
+    RewriteCond %{THE_REQUEST} \s/+(.*?)\.php[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
+    # --------------------------------------------
+    # 4. Modules Routing
+    # --------------------------------------------
+    RewriteRule ^products$ modules/products.php [L]
+    RewriteRule ^preorders$ modules/preorders.php [L]
+    RewriteRule ^purchases$ modules/purchases.php [L]
+    RewriteRule ^categories$ modules/categories.php [L]
+    RewriteRule ^suppliers$ modules/suppliers.php [L]
+    RewriteRule ^customer$ modules/customer.php [L]
+
+    RewriteRule ^Paymentmethod$ modules/Paymentmethod.php [L]
+    RewriteRule ^Paymentcategory$ modules/Paymentcategory.php [L]
+    RewriteRule ^Payment$ modules/Payment.php [L]
+    RewriteRule ^sales$ modules/sales.php [L]
+    RewriteRule ^pointofsales$ modules/pointofsales.php [L]
+
+    RewriteRule ^branches$ modules/branches.php [L]
+    RewriteRule ^privilege$ modules/privilege.php [L]
+    RewriteRule ^userprofile$ modules/userprofile.php [L]
+
+    RewriteRule ^emptype$ modules/emptype.php [L]
+    RewriteRule ^employee$ modules/employee.php [L]
+    RewriteRule ^employeetasks$ modules/employeetasks.php [L]
+    RewriteRule ^employeereport$ modules/employeereport.php [L]
+
+    RewriteRule ^sendingsms$ modules/sendingsms.php [L]
+
+    RewriteRule ^salesreport$ modules/salesreport.php [L]
+    RewriteRule ^reportpayment$ modules/reportpayment.php [L]
+    RewriteRule ^salesvsexpenses$ modules/salesvsexpenses.php [L]
+    RewriteRule ^neticome$ modules/neticome.php [L]
+    RewriteRule ^reportproduct$ modules/reportproduct.php [L]
+    RewriteRule ^customerreport$ modules/customerreport.php [L]
+
+    # --------------------------------------------
+    # 5. Fallback Extension-less File Matching
+    # --------------------------------------------
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+# Protect Sensitive Files
+<FilesMatch "(db\.php|config\.php|mail\.php)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<Files .htaccess>
+    Require all denied
+</Files>
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/xml
+</IfModule>
+
+# Caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

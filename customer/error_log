@@ -1,0 +1,33 @@
+[22-Jul-2026 17:41:01 America/Chicago] PHP Warning:  include(..includes/footer.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/customer/register.php on line 219
+[22-Jul-2026 17:41:01 America/Chicago] PHP Warning:  include(..includes/footer.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/customer/register.php on line 219
+[22-Jul-2026 17:41:01 America/Chicago] PHP Warning:  include(): Failed opening '..includes/footer.php' for inclusion (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/customer/register.php on line 219
+[16-Aug-2026 16:40:48 America/Chicago] PHP Warning:  require_once(/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[16-Aug-2026 16:40:48 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/config/mail.php:6
+Stack trace:
+#0 /home1/oaldtnte/canuuni.com/customer/forgot_password.php(13): include()
+#1 {main}
+  thrown in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[16-Aug-2026 16:40:48 America/Chicago] PHP Warning:  require_once(/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[16-Aug-2026 16:40:48 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/config/mail.php:6
+Stack trace:
+#0 /home1/oaldtnte/canuuni.com/customer/forgot_password.php(13): include()
+#1 {main}
+  thrown in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[20-Aug-2026 18:58:46 America/Chicago] PHP Warning:  require_once(/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[20-Aug-2026 18:58:46 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/config/mail.php:6
+Stack trace:
+#0 /home1/oaldtnte/canuuni.com/customer/forgot_password.php(13): include()
+#1 {main}
+  thrown in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[08-Oct-2026 09:58:15 America/Chicago] PHP Warning:  require_once(/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[08-Oct-2026 09:58:15 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/config/mail.php:6
+Stack trace:
+#0 /home1/oaldtnte/canuuni.com/customer/forgot_password.php(13): include()
+#1 {main}
+  thrown in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[17-Oct-2026 03:05:34 America/Chicago] PHP Warning:  require_once(/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
+[17-Oct-2026 03:05:34 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/oaldtnte/canuuni.com/config/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php85/root/usr/share/pear') in /home1/oaldtnte/canuuni.com/config/mail.php:6
+Stack trace:
+#0 /home1/oaldtnte/canuuni.com/customer/forgot_password.php(13): include()
+#1 {main}
+  thrown in /home1/oaldtnte/canuuni.com/config/mail.php on line 6
