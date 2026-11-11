@@ -17,7 +17,7 @@ git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
                     <li><i class="bi bi-telephone me-2 text-primary"></i>+252 (617) 665667</li>
                 </ul>
             </div>
-
+<!-- another comment -->
             <!-- Quick Links -->
             <div class="col-lg-2 col-md-6 col-6">
                 <h6 class="fw-bold text-white mb-3">Quick Links</h6>
@@ -25,7 +25,7 @@ git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
                     <li class="mb-2"><a href="index.php" class="text-secondary text-decoration-none">Home</a></li>
                     <li class="mb-2"><a href="products.php" class="text-secondary text-decoration-none">Products</a></li>
                     <li class="mb-2"><a href="cart.php" class="text-secondary text-decoration-none">Shopping Cart</a></li>
-                    <li class="mb-2"><a href="customer/login.php" class="text-secondary text-decoration-none">My Account</a></li>
+                    <li class="mb-2"><a href="customer/login.php" class="text-secondary text-decoration-none">My Accounts</a></li>
                 </ul>
             </div>
 
