@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
+git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
     <div class="container">
         <!-- Main Footer Links Grid -->
         <div class="row g-4 border-bottom border-secondary pb-4">
