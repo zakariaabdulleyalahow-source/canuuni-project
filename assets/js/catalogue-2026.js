@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sort = document.getElementById('cu-sort-products');
   const stockOnly = document.getElementById('cu-stock-only');
   const savedOnly = document.getElementById('cu-saved-only');
+  const priceMin = document.getElementById('cu-price-min');
+  const priceMax = document.getElementById('cu-price-max');
+  const clearFilters = document.getElementById('cu-clear-filters');
   const count = document.getElementById('cu-visible-count');
   const empty = document.getElementById('cu-filter-empty');
   const savedCount = document.getElementById('cu-saved-count');
@@ -39,8 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => {
       const isSaved = saved.includes(String(card.dataset.id));
       const inStock = card.dataset.stock === '1';
+      const price = Number(card.dataset.price) || 0;
+      const min = priceMin && priceMin.value !== '' ? Number(priceMin.value) : null;
+      const max = priceMax && priceMax.value !== '' ? Number(priceMax.value) : null;
+      const inPriceRange = (min === null || price >= min) && (max === null || price <= max);
       const show = (!stockOnly || !stockOnly.checked || inStock) &&
-                   (!savedOnly || !savedOnly.checked || isSaved);
+                   (!savedOnly || !savedOnly.checked || isSaved) && inPriceRange;
       card.hidden = !show;
       if (show) visible++;
     });
@@ -103,6 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sort) sort.addEventListener('change', sortCards);
   if (stockOnly) stockOnly.addEventListener('change', applyFilters);
   if (savedOnly) savedOnly.addEventListener('change', applyFilters);
+  if (priceMin) priceMin.addEventListener('input', applyFilters);
+  if (priceMax) priceMax.addEventListener('input', applyFilters);
+  if (clearFilters) clearFilters.addEventListener('click', () => {
+    if (stockOnly) stockOnly.checked = false;
+    if (savedOnly) savedOnly.checked = false;
+    if (priceMin) priceMin.value = '';
+    if (priceMax) priceMax.value = '';
+    if (sort) sort.value = 'featured';
+    sortCards();
+    applyFilters();
+  });
   updateSavedUI();
   applyFilters();
 
