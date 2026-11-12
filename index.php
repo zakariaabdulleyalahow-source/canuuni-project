@@ -83,7 +83,7 @@ include 'includes/navbar.php';
         <aside class="col-lg-3">
             <!-- Mobile Expandable Toggle Button (Hidden on Desktop) -->
             <div class="d-lg-none mb-3">
-                <button class="btn.category-toggle-btn w-100 d-flex justify-content-between align-items-center bg-white border shadow-sm p-3 rounded-4 fw-bold text-dark" 
+                <button class="btn category-toggle-btn w-100 d-flex justify-content-between align-items-center bg-white border shadow-sm p-3 rounded-4 fw-bold text-dark" 
                         type="button" 
                         data-bs-toggle="collapse" 
                         data-bs-target="#mobileCategoryCollapse" 
