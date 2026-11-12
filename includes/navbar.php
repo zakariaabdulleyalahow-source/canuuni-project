@@ -1,7 +1,7 @@
 <!-- includes/navbar.php -->
-<header class="sticky-top bg-white shadow-sm">
+<header class="sticky-top cu-header">
     <!-- Top Bar -->
-    <div class="bg-dark text-white py-1 fs-7">
+    <div class="cu-topbar py-2">
         <div class="container d-flex justify-content-between align-items-center px-3">
             <span class="text-truncate" style="max-width: 65%;"><i class="bi bi-telephone-fill me-2"></i> Support: +252 617 665667</span>
             <span class="d-none d-sm-inline">Free shipping on orders over $50!</span>
@@ -9,10 +9,11 @@
     </div>
     
     <!-- Main Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white cu-navbar">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary fs-4 fs-lg-3 text-truncate" href="/">
-                <i class="bi bi-bag-heart-fill me-2"></i>Canuuni E-Commerce
+            <a class="navbar-brand cu-brand" href="/">
+                <span class="cu-brand-mark"><i class="bi bi-bag-heart-fill"></i></span>
+                <span>Canuuni<small>Electronics &amp; more</small></span>
             </a>
 
             <?php 
@@ -27,9 +28,9 @@
 
             <!-- Mobile Action Icons (Cart & Hamburger) -->
             <div class="d-flex align-items-center gap-2 d-lg-none">
-                <a class="nav-link position-relative px-2" href="cart" title="View Cart">
+                <a class="nav-link position-relative px-2 cu-cart-link" href="cart" title="View Cart">
                     <i class="bi bi-cart3 fs-4 text-dark"></i>
-                    <span id="cart-counter-badge-mobile" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <span id="cart-counter-badge-mobile" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cu-cart-badge">
                         <?= $initial_cart_count ?>
                     </span>
                 </a>
@@ -41,7 +42,7 @@
             <!-- Desktop Navbar Content -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Search Bar -->
-                <form class="d-flex mx-auto w-50 my-2 my-lg-0" method="GET" action="index">
+                <form class="d-flex mx-auto cu-search my-2 my-lg-0" method="GET" action="index">
                     <?php if(!empty($_GET['category'])): ?>
                         <input type="hidden" name="category" value="<?= e($_GET['category']) ?>">
                     <?php endif; ?>
