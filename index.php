@@ -76,7 +76,7 @@ include 'includes/header.php';
 include 'includes/navbar.php';
 ?>
 
-<main class="container my-4 my-md-5 flex-grow-1">
+<main class="container cu-store-main flex-grow-1">
     <div class="row g-4">
         
         <!-- Sidebar: Responsive & Expandable Category Navigation -->
@@ -99,8 +99,8 @@ include 'includes/navbar.php';
 
             <!-- Category Container (Collapsible on Mobile, Permanent Sidebar on Desktop) -->
             <div class="collapse d-lg-block" id="mobileCategoryCollapse">
-                <div class="card border-0 shadow-sm p-3 sticky-sm-top rounded-4" style="top: 100px;">
-                    <h5 class="fw-bold mb-3 text-secondary d-none d-lg-block"><i class="bi bi-filter-left me-2"></i>Categories</h5>
+                <div class="cu-category-panel sticky-sm-top" style="top: 100px;">
+                    <div class="cu-panel-title d-none d-lg-flex"><span><i class="bi bi-grid me-2 text-primary"></i>Browse categories</span></div>
                     <div class="list-group list-group-flush category-list-group">
                         <a href="index<?= !empty($search_filter) ? '?search=' . urlencode($search_filter) : '' ?>" 
                            class="list-group-item list-group-item-action <?= empty($category_filter) ? 'active' : '' ?> rounded mb-1 border-0">
@@ -129,19 +129,23 @@ include 'includes/navbar.php';
 
         <!-- Main Product Grid Section -->
         <section class="col-lg-9">
-            <div class="p-3 p-md-5 mb-4 rounded-4 text-body-emphasis bg-white shadow-sm border-start border-primary border-5">
-                <div class="col-lg-8 px-0">
-                    <h1 class="h3 h-lg-display-6 fw-bold">Exclusive Deals & Quality Products</h1>
-                    <p class="lead fs-6 fs-lg-lead my-2 my-lg-3 text-muted">Explore top-tier items curated specifically for your workflow with competitive wholesale values.</p>
+            <section class="cu-hero mb-4 mb-lg-5">
+                <div class="position-relative" style="z-index:1;max-width:720px">
+                    <span class="cu-hero-eyebrow"><i class="bi bi-stars"></i> Canuuni curated collection</span>
+                    <h1 class="mt-3 mb-3">Everyday technology. <span class="text-white">Better value.</span></h1>
+                    <p class="mb-4">Discover quality electronics and useful essentials selected to make everyday life easier. Find what you need at a price you’ll love.</p>
+                    <a href="#canuuni-products" class="btn btn-light rounded-pill px-4 py-3">Explore products <i class="bi bi-arrow-down ms-2"></i></a>
+                    <div class="cu-hero-note"><i class="bi bi-shield-check"></i> Quality picks <span class="opacity-50">•</span> Great value <span class="opacity-50">•</span> Friendly support</div>
                 </div>
-            </div>
+            </section>
 
-            <div class="d-flex justify-content-between align-items-center mb-3 mb-md-4">
-                <h4 class="fw-bold text-dark mb-0 fs-5 fs-lg-4">Products</h4>
+            <div class="cu-section-heading">
+                <div><h2>Explore our products</h2><p>Find the right product for your home, work and everyday needs.</p></div>
+                <span class="cu-result-count"><?= count($products) ?> products</span>
             </div>
             
             <!-- Product Grid: 2 columns on mobile -->
-            <div class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-2 g-md-4 mobile-product-grid">
+            <div id="canuuni-products" class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-2 g-md-4 mobile-product-grid">
                 <?php if (!empty($products)): ?>
                     <?php foreach ($products as $product): ?>
                         <?php 
@@ -220,7 +224,7 @@ include 'includes/navbar.php';
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="col-12">
-                        <div class="alert alert-info rounded-4 border-0 shadow-sm p-4 text-center">
+                        <div class="cu-empty-state">
                             <i class="bi bi-info-circle display-5 mb-2 d-block"></i>
                             No products are available matching your query parameters for this branch location.
                         </div>
