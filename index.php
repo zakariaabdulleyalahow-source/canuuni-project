@@ -149,6 +149,13 @@ include 'includes/navbar.php';
                     <span class="cu-toolbar-label"><i class="bi bi-sliders me-1"></i> Refine</span>
                     <label class="cu-filter-chip"><input class="form-check-input" type="checkbox" id="cu-stock-only"><span>In stock</span></label>
                     <label class="cu-filter-chip"><input class="form-check-input" type="checkbox" id="cu-saved-only"><span><i class="bi bi-heart me-1"></i>Saved <span id="cu-saved-count">0</span></span></label>
+                    <div class="cu-price-filter">
+                        <span>Price $</span>
+                        <input type="number" id="cu-price-min" min="0" step="1" placeholder="Min" aria-label="Minimum price">
+                        <span>to</span>
+                        <input type="number" id="cu-price-max" min="0" step="1" placeholder="Max" aria-label="Maximum price">
+                    </div>
+                    <button type="button" id="cu-clear-filters" class="cu-clear-filters">Clear filters</button>
                 </div>
                 <label class="cu-sort-control"><span>Sort by</span>
                     <select class="form-select form-select-sm" id="cu-sort-products" aria-label="Sort products">
