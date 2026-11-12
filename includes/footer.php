@@ -1,13 +1,11 @@
-git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
+<footer class="cu-footer pt-5 pb-3 mt-auto">
     <div class="container">
         <!-- Main Footer Links Grid -->
-        <div class="row g-4 border-bottom border-secondary pb-4">
+        <div class="row g-4 border-bottom cu-footer-divider pb-4">
             
             <!-- Brand Info & Contact -->
             <div class="col-lg-4 col-md-6">
-                <h5 class="fw-bold text-primary mb-3">
-                    <i class="bi bi-bag-heart-fill me-2"></i>Canuuni Electronic
-                </h5>
+                <div class="cu-footer-brand mb-3"><span class="cu-footer-mark"><i class="bi bi-bag-heart-fill"></i></span><span>Canuuni Electronic</span></div>
                 <p class="text-secondary small mb-3">
                     Your one-stop destination for high-quality electronics and wholesale pricing.
                 </p>
@@ -17,7 +15,7 @@ git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
                     <li><i class="bi bi-telephone me-2 text-primary"></i>+252 (617) 665667</li>
                 </ul>
             </div>
-<!-- another comment -->
+
             <!-- Quick Links -->
             <div class="col-lg-2 col-md-6 col-6">
                 <h6 class="fw-bold text-white mb-3">Quick Links</h6>
