@@ -1,9 +1,7 @@
 /* Canuuni 2026 catalogue interactions — browser-side only */
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('canuuni-products');
-  if (!grid) return;
-
-  const cards = Array.from(grid.querySelectorAll('[data-product-card]'));
+  const cards = grid ? Array.from(grid.querySelectorAll('[data-product-card]')) : [];
   const sort = document.getElementById('cu-sort-products');
   const stockOnly = document.getElementById('cu-stock-only');
   const savedOnly = document.getElementById('cu-saved-only');
