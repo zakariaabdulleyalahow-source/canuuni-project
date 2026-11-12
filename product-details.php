@@ -259,7 +259,6 @@ body {
                             <i class="bi bi-clock-history fs-5"></i> Pre-Order Item
                         </button>
                     <?php endif; ?>
-                    <?php endif; ?>
                     <button type="button" class="cu-save-detail" data-cu-detail-save data-id="<?= e($product['id']) ?>" aria-pressed="false">
                         <i class="bi bi-heart me-2"></i>Save for later
                     </button>
