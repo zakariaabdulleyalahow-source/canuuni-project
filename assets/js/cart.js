@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {
-                    const badge = document.getElementById('cart-counter-badge');
-                    if (badge) badge.innerText = data.cartCount;
+                    document.querySelectorAll('#cart-counter-badge, #cart-counter-badge-mobile').forEach(badge => { badge.innerText = data.cartCount; });
                     Swal.fire({ icon: 'success', title: 'Added to Cart', text: data.message, timer: 1500, showConfirmButton: false });
                 } else {
                     Swal.fire({ icon: 'error', title: 'Notice', text: data.message });
