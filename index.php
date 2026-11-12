@@ -236,5 +236,4 @@ include 'includes/navbar.php';
     </div>
 </main>
 
-<script src="assets/js/cart.js"></script>
 <?php include 'includes/footer.php'; ?>
