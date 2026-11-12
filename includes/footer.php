@@ -1,13 +1,11 @@
-git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
+<footer class="cu-footer pt-5 pb-3 mt-auto">
     <div class="container">
         <!-- Main Footer Links Grid -->
-        <div class="row g-4 border-bottom border-secondary pb-4">
+        <div class="row g-4 border-bottom cu-footer-divider pb-4">
             
             <!-- Brand Info & Contact -->
             <div class="col-lg-4 col-md-6">
-                <h5 class="fw-bold text-primary mb-3">
-                    <i class="bi bi-bag-heart-fill me-2"></i>Canuuni Electronic
-                </h5>
+                <div class="cu-footer-brand mb-3"><span class="cu-footer-mark"><i class="bi bi-bag-heart-fill"></i></span><span>Canuuni Electronic</span></div>
                 <p class="text-secondary small mb-3">
                     Your one-stop destination for high-quality electronics and wholesale pricing.
                 </p>
@@ -17,7 +15,7 @@ git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
                     <li><i class="bi bi-telephone me-2 text-primary"></i>+252 (617) 665667</li>
                 </ul>
             </div>
-<!-- another comment -->
+
             <!-- Quick Links -->
             <div class="col-lg-2 col-md-6 col-6">
                 <h6 class="fw-bold text-white mb-3">Quick Links</h6>
@@ -79,7 +77,7 @@ git<footer class="bg-dark text-white pt-5 pb-3 mt-auto">
 <!-- External Libraries & Core Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/js/cart.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="<?= htmlspecialchars($cu_asset_base . '/assets/js/cart.js', ENT_QUOTES, 'UTF-8') ?>"></script>
+<script src="<?= htmlspecialchars($cu_asset_base . '/assets/js/catalogue-2026.js', ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 </html>

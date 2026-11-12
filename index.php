@@ -76,14 +76,14 @@ include 'includes/header.php';
 include 'includes/navbar.php';
 ?>
 
-<main class="container my-4 my-md-5 flex-grow-1">
+<main class="container cu-store-main flex-grow-1">
     <div class="row g-4">
         
         <!-- Sidebar: Responsive & Expandable Category Navigation -->
         <aside class="col-lg-3">
             <!-- Mobile Expandable Toggle Button (Hidden on Desktop) -->
             <div class="d-lg-none mb-3">
-                <button class="btn.category-toggle-btn w-100 d-flex justify-content-between align-items-center bg-white border shadow-sm p-3 rounded-4 fw-bold text-dark" 
+                <button class="btn category-toggle-btn w-100 d-flex justify-content-between align-items-center bg-white border shadow-sm p-3 rounded-4 fw-bold text-dark" 
                         type="button" 
                         data-bs-toggle="collapse" 
                         data-bs-target="#mobileCategoryCollapse" 
@@ -99,8 +99,8 @@ include 'includes/navbar.php';
 
             <!-- Category Container (Collapsible on Mobile, Permanent Sidebar on Desktop) -->
             <div class="collapse d-lg-block" id="mobileCategoryCollapse">
-                <div class="card border-0 shadow-sm p-3 sticky-sm-top rounded-4" style="top: 100px;">
-                    <h5 class="fw-bold mb-3 text-secondary d-none d-lg-block"><i class="bi bi-filter-left me-2"></i>Categories</h5>
+                <div class="cu-category-panel sticky-sm-top" style="top: 100px;">
+                    <div class="cu-panel-title d-none d-lg-flex"><span><i class="bi bi-grid me-2 text-primary"></i>Browse categories</span></div>
                     <div class="list-group list-group-flush category-list-group">
                         <a href="index<?= !empty($search_filter) ? '?search=' . urlencode($search_filter) : '' ?>" 
                            class="list-group-item list-group-item-action <?= empty($category_filter) ? 'active' : '' ?> rounded mb-1 border-0">
@@ -129,19 +129,42 @@ include 'includes/navbar.php';
 
         <!-- Main Product Grid Section -->
         <section class="col-lg-9">
-            <div class="p-3 p-md-5 mb-4 rounded-4 text-body-emphasis bg-white shadow-sm border-start border-primary border-5">
-                <div class="col-lg-8 px-0">
-                    <h1 class="h3 h-lg-display-6 fw-bold">Exclusive Deals & Quality Products</h1>
-                    <p class="lead fs-6 fs-lg-lead my-2 my-lg-3 text-muted">Explore top-tier items curated specifically for your workflow with competitive wholesale values.</p>
+            <section class="cu-hero mb-4 mb-lg-5">
+                <div class="position-relative" style="z-index:1;max-width:720px">
+                    <span class="cu-hero-eyebrow"><i class="bi bi-stars"></i> Canuuni curated collection</span>
+                    <h1 class="mt-3 mb-3">Everyday technology. <span class="text-white">Better value.</span></h1>
+                    <p class="mb-4">Discover quality electronics and useful essentials selected to make everyday life easier. Find what you need at a price you’ll love.</p>
+                    <a href="#canuuni-products" class="btn btn-light rounded-pill px-4 py-3">Explore products <i class="bi bi-arrow-down ms-2"></i></a>
+                    <div class="cu-hero-note"><i class="bi bi-shield-check"></i> Quality picks <span class="opacity-50">•</span> Great value <span class="opacity-50">•</span> Friendly support</div>
                 </div>
-            </div>
+            </section>
 
-            <div class="d-flex justify-content-between align-items-center mb-3 mb-md-4">
-                <h4 class="fw-bold text-dark mb-0 fs-5 fs-lg-4">Products</h4>
+            <div class="cu-section-heading">
+                <div><h2>Explore our products</h2><p>Find the right product for your home, work and everyday needs.</p></div>
+                <span class="cu-result-count"><span id="cu-visible-count"><?= count($products) ?></span> products</span>
             </div>
             
-            <!-- Product Grid: 2 columns on mobile -->
-            <div class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-2 g-md-4 mobile-product-grid">
+            <div class="cu-catalogue-toolbar mb-3">
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="cu-toolbar-label"><i class="bi bi-sliders me-1"></i> Refine</span>
+                    <label class="cu-filter-chip"><input class="form-check-input" type="checkbox" id="cu-stock-only"><span>In stock</span></label>
+                    <label class="cu-filter-chip"><input class="form-check-input" type="checkbox" id="cu-saved-only"><span><i class="bi bi-heart me-1"></i>Saved <span id="cu-saved-count">0</span></span></label>
+                    <div class="cu-price-filter">
+                        <span>Price $</span>
+                        <input type="number" id="cu-price-min" min="0" step="1" placeholder="Min" aria-label="Minimum price">
+                        <span>to</span>
+                        <input type="number" id="cu-price-max" min="0" step="1" placeholder="Max" aria-label="Maximum price">
+                    </div>
+                    <button type="button" id="cu-clear-filters" class="cu-clear-filters">Clear filters</button>
+                </div>
+                <label class="cu-sort-control"><span>Sort by</span>
+                    <select class="form-select form-select-sm" id="cu-sort-products" aria-label="Sort products">
+                        <option value="featured">Featured</option><option value="price-low">Price: low to high</option>
+                        <option value="price-high">Price: high to low</option><option value="name">Name: A to Z</option>
+                    </select>
+                </label>
+            </div>
+            <div id="canuuni-products" class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-2 g-md-4 mobile-product-grid">
                 <?php if (!empty($products)): ?>
                     <?php foreach ($products as $product): ?>
                         <?php 
@@ -153,13 +176,20 @@ include 'includes/navbar.php';
                         $image_url = !empty($product['productimage']) ? "https://db.Maaldhowr.com/modules/productsimage/" . $product['productimage'] : null;
                         $details_url = product_url($product['id'], $product['product_name']);
                         ?>
-                        <div class="col">
+                        <div class="col" data-product-card data-id="<?= e($product['id']) ?>"
+                             data-name="<?= e($product['product_name']) ?>" data-price="<?= $calculated_selling_price ?>"
+                             data-position="<?= (int)array_search($product, $products, true) ?>"
+                             data-stock="<?= $product['quantity'] > 0 ? '1' : '0' ?>"
+                             data-image="<?= e($image_url ?? '') ?>" data-description="<?= e($product['description'] ?? '') ?>"
+                             data-href="<?= e($details_url) ?>">
                             <div class="card h-100 border-0 shadow-sm product-card position-relative rounded-3 rounded-md-4 overflow-hidden">
                                 
+                                <div class="cu-card-actions">
+                                    <button type="button" class="cu-icon-action cu-wishlist-btn" aria-label="Save item" aria-pressed="false"><i class="bi bi-heart"></i></button>
+                                    <button type="button" class="cu-icon-action cu-quickview-btn" aria-label="Quick view"><i class="bi bi-eye"></i></button>
+                                </div>
                                 <?php if($advantage_text): ?>
-                                    <span class="position-absolute top-0 start-0 m-2 m-md-3 badge bg-warning text-dark fw-bold shadow-sm" style="z-index: 2;">
-                                        <?= $advantage_text ?>
-                                    </span>
+                                    <span class="cu-product-promo badge bg-warning text-dark fw-bold" style="z-index: 2;"><?= $advantage_text ?></span>
                                 <?php endif; ?>
 
                                 <a href="<?= $details_url ?>" class="text-decoration-none">
@@ -220,17 +250,34 @@ include 'includes/navbar.php';
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="col-12">
-                        <div class="alert alert-info rounded-4 border-0 shadow-sm p-4 text-center">
+                        <div class="cu-empty-state">
                             <i class="bi bi-info-circle display-5 mb-2 d-block"></i>
                             No products are available matching your query parameters for this branch location.
                         </div>
                     </div>
                 <?php endif; ?>
             </div>
+            <div id="cu-filter-empty" class="cu-empty-state mt-3" hidden>
+                <i class="bi bi-funnel display-5 mb-2 d-block"></i><h3>No matching products</h3>
+                <p class="text-muted mb-0">Change your filters to see more products.</p>
+            </div>
         </section>
-
     </div>
 </main>
+<div class="modal fade" id="cuQuickViewModal" tabindex="-1" aria-labelledby="cuQuickViewTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content cu-quickview-modal">
+        <div class="modal-header border-0 pb-0"><span class="cu-modal-eyebrow">Quick product preview</span>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+        <div class="modal-body p-4 p-md-5"><div class="row g-4 align-items-center">
+            <div class="col-md-5"><div class="cu-quickview-image"><img data-cu-qv-image src="" alt="" hidden><div data-cu-qv-placeholder><i class="bi bi-box-seam"></i></div></div></div>
+            <div class="col-md-7"><span data-cu-qv-stock class="badge rounded-pill mb-3"></span>
+                <h2 id="cuQuickViewTitle" data-cu-qv-name class="h3 fw-bold mb-2"></h2>
+                <div data-cu-qv-price class="cu-quickview-price mb-3"></div><p data-cu-qv-description class="text-muted mb-4"></p>
+                <div class="d-flex flex-wrap gap-2"><button type="button" data-cu-qv-add class="btn btn-primary rounded-pill px-4 btn-add-to-cart"><i class="bi bi-cart-plus me-2"></i>Add to Cart</button>
+                    <a data-cu-qv-link href="#" class="btn btn-outline-primary rounded-pill px-4">View details</a></div>
+            </div>
+        </div></div>
+    </div></div>
+</div>
 
-<script src="assets/js/cart.js"></script>
 <?php include 'includes/footer.php'; ?>
