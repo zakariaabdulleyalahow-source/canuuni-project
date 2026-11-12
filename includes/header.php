@@ -1,5 +1,5 @@
 <?php
-$cu_asset_base = rtrim(str_replace('\\\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+$cu_asset_base = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? '/'), '/');
 if (in_array(basename($cu_asset_base), ['customer', 'admin'], true)) {
     $cu_asset_base = rtrim(dirname($cu_asset_base), '/');
 }
