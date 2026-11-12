@@ -318,5 +318,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<script src="assets/js/cart.js"></script>
 <?php include 'includes/footer.php'; ?>
