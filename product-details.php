@@ -74,6 +74,7 @@ include 'includes/navbar.php';
 ?>
 
 <style>
+/* Legacy page styles retained only for compatibility; Canuuni 2026 styles take precedence below. */
 :root {
     --primary-color: #0d6efd;
     --border-radius-lg: 1rem;
@@ -170,7 +171,7 @@ body {
 }
 </style>
 
-<main class="container my-4 my-lg-5 flex-grow-1">
+<main class="container cu-store-main flex-grow-1">
     
     <!-- Breadcrumb Navigation -->
     <nav aria-label="breadcrumb" class="mb-4">
@@ -188,12 +189,12 @@ body {
     </nav>
 
     <!-- Main Product Section -->
-    <div class="product-details-card p-4 p-lg-5 mb-5">
+    <div class="cu-product-detail mb-5">
         <div class="row g-5 align-items-center">
             
             <!-- Product Image Display -->
             <div class="col-lg-5">
-                <div class="product-img-wrapper">
+                <div class="cu-product-gallery">
                     <?php if($image_url): ?>
                         <img src="<?= e($image_url) ?>" 
                              alt="<?= e($product['product_name']) ?>" 
@@ -219,21 +220,21 @@ body {
                     <span class="text-muted ms-auto small">Barcode: <strong class="text-dark"><?= e($product['barcode']) ?></strong></span>
                 </div>
 
-                <h1 class="fw-bold text-dark mb-2 display-6"><?= e($product['product_name']) ?></h1>
+                <h1 class="cu-product-title mb-2"><?= e($product['product_name']) ?></h1>
                 
                 <p class="text-muted mb-4 small">
                     Category: <a href="/index?category=<?= urlencode($product['category_id']); ?>" class="text-decoration-none fw-semibold text-primary"><?= e($product['category_name']) ?></a>
                 </p>
 
-                <div class="mb-4 p-3 bg-light rounded-4 d-flex align-items-center">
-                    <span class="price-tag">
+                <div class="mb-4 p-3 rounded-4 d-flex align-items-center bg-light">
+                    <span class="cu-product-price">
                         $<?= number_format($calculated_selling_price, 2) ?>
                     </span>
                 </div>
 
                 <div class="mb-4">
                     <h6 class="fw-bold text-dark mb-2">Description</h6>
-                    <p class="text-muted text-secondary line-height-base mb-0">
+                    <p class="cu-product-description mb-0">
                         <?= !empty($product['description']) ? nl2br(e($product['description'])) : 'No detailed description available for this item.' ?>
                     </p>
                 </div>
@@ -241,8 +242,10 @@ body {
                 <!-- Add to Cart / Pre-Order Control Area -->
                 <div class="d-flex flex-wrap gap-3 align-items-center pt-4 border-top">
                     <?php if ($product['quantity'] > 0): ?>
-                        <div class="qty-input-group d-flex align-items-center">
-                            <input type="number" id="product-qty" class="form-control text-center shadow-none" value="1" min="1" max="<?= (int)$product['quantity'] ?>">
+                        <div class="cu-qty-stepper" aria-label="Choose quantity">
+                            <button type="button" data-qty-step="-1" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                            <input type="number" id="product-qty" value="1" min="1" max="<?= (int)$product['quantity'] ?>" inputmode="numeric" aria-label="Quantity">
+                            <button type="button" data-qty-step="1" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
                         </div>
                         <button class="btn btn-primary action-btn shadow-sm btn-add-to-cart flex-grow-1 flex-lg-grow-0"
                                 data-id="<?= e($product['id']) ?>"
@@ -256,8 +259,16 @@ body {
                             <i class="bi bi-clock-history fs-5"></i> Pre-Order Item
                         </button>
                     <?php endif; ?>
+                    <?php endif; ?>
+                    <button type="button" class="cu-save-detail" data-cu-detail-save data-id="<?= e($product['id']) ?>" aria-pressed="false">
+                        <i class="bi bi-heart me-2"></i>Save for later
+                    </button>
                 </div>
-
+                <div class="cu-detail-trust">
+                    <div class="cu-detail-trust-item"><i class="bi bi-shield-check"></i><span><strong class="d-block text-dark">Quality selection</strong>Carefully listed products</span></div>
+                    <div class="cu-detail-trust-item"><i class="bi bi-headset"></i><span><strong class="d-block text-dark">Customer support</strong>We're here to help</span></div>
+                    <div class="cu-detail-trust-item"><i class="bi bi-lock"></i><span><strong class="d-block text-dark">Secure checkout</strong>Protected order process</span></div>
+                </div>
             </div>
         </div>
     </div>
@@ -266,15 +277,15 @@ body {
     <?php if (!empty($related_products)): ?>
         <section class="mt-5 pt-3">
             <h3 class="fw-bold mb-4 text-dark">Related Products</h3>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3 g-md-4">
                 <?php foreach ($related_products as $rel): ?>
                     <?php 
                     $rel_selling_price = (float)($rel['unitprice'] ?? 0) + (float)($rel['advantage'] ?? 0);
                     $rel_image_url = !empty($rel['productimage']) ? "https://db.canuuni.com/modules/productsimage/" . $rel['productimage'] : null;
                     ?>
                     <div class="col">
-                        <div class="card related-card h-100 d-flex flex-column">
-                            <div class="related-img-container d-flex align-items-center justify-content-center">
+                        <div class="cu-related-card d-flex flex-column">
+                            <div class="cu-related-image d-flex align-items-center justify-content-center">
                                 <?php if($rel_image_url): ?>
                                     <img src="<?= e($rel_image_url) ?>" alt="<?= e($rel['product_name']) ?>" class="img-fluid h-100 object-fit-contain" onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'bi bi-image display-5 text-muted opacity-25\'></i>';">
                                 <?php else: ?>
